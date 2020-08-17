@@ -1,2 +1,308 @@
 # phone-directory2
-phone directory
+Hi ! i'm going to create an E-shopping application in this repository. 
+Follow this repo to learn more about this application.
+
+# Content
+
+* Run this application
+* Data Model for the application
+* Resources
+
+# Run this application
+
+## 1.1 Preprequisite
+
+you must have following installed in your local system.
+1. Python 3.6 or later
+2. Docker Desktop latest
+
+## 1.2 Start Cassandra using Docker
+To start cassandra on docker, jump into the directory and start ` CMD ` in the current directory.
+```
+cd E-shopping-app/materials
+docker-compose up
+```
+Expected Output:
+```
+
+```
+
+## 1.3 Create Schema Tables
+Open `CLI ` on docker & run the following to open Cql shell for querrying.
+```
+# cqlsh
+```
+Expected Output:
+```
+Connected to spring_demo_cluster at caas-cluster-caas-dc-service:9042.
+[cqlsh 6.8.0 | DSE 6.8.2.125 | CQL spec 3.4.5 | DSE protocol v2]
+Use HELP for help.
+User@cqlsh>
+```
+
+Now copy the following querries to create a keyspace and some of its tables.
+
+```
+CREATE KEYSPACE killrvideo WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+
+use killrvideo;
+
+CREATE TYPE killrvideo.acc_details (
+    acc_no bigint,
+    pin_no text
+);
+
+CREATE TYPE killrvideo.address (
+    doorid text,
+    street text,
+    city text,
+    country text,
+    pincode int
+);
+
+CREATE TABLE killrvideo.add_product (
+    userid uuid,
+    added_at timestamp,
+    title text,
+    productid timeuuid,
+    cost float,
+    description text,
+    discount float,
+    isavailable boolean,
+    stockleft int,
+    tags set<text>,
+    PRIMARY KEY (userid, added_at, title, productid)
+) WITH CLUSTERING ORDER BY (added_at DESC, title ASC, productid ASC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.account_type (
+    acc_type text,
+    transaction_at timestamp,
+    userid uuid,
+    acc_details frozen<acc_details>,
+    transactionid timeuuid,
+    PRIMARY KEY (acc_type, transaction_at, userid)
+) WITH CLUSTERING ORDER BY (transaction_at DESC, userid ASC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.user_details (
+    userid uuid PRIMARY KEY,
+    address frozen<address>,
+    email text,
+    firstname text,
+    lastname text,
+    products_purchased set<text>
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.product_details (
+    productid timeuuid PRIMARY KEY,
+    added_at timestamp,
+    added_by uuid,
+    cost int,
+    description text,
+    discount int,
+    tags set<text>,
+    title text,
+    isavailable bool,
+    stockleft int
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.latest_products (
+    year int,
+    added_at timestamp,
+    productid timeuuid,
+    title text,
+    userid uuid,
+    PRIMARY KEY (year, added_at, productid)
+) WITH CLUSTERING ORDER BY (added_at DESC, productid ASC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.users_credentials (
+    userid uuid PRIMARY KEY,
+    password text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.users_register (
+    emailid text PRIMARY KEY,
+    password text,
+    userid uuid
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+CREATE TABLE killrvideo.buy_product (
+    productid timeuuid,
+    transaction_at timestamp,
+    userid uuid,
+    cost int,
+    stocks int,
+    title text,
+    transactionid timeuuid,
+    PRIMARY KEY (productid, transaction_at, userid)
+) WITH CLUSTERING ORDER BY (transaction_at ASC, userid ASC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+```
+
+## 1.4 Run python file
+
+` Note: Ensure that you have already installed cassandra-python-driver or please do install to run this application successfuly. `
+
+Now run ` cluster.py ` from your ` CMD ` on your current directory.
+
+### 1.4.1 Register an account
+To register an account in this appplication, Make sure you do like the following one.
+```
+'**********************Electronics Shopping plaza*********************'
+Click 1 to view to view Latest Products
+Else, Click 0 to Register or Authenticate.
+Enter your choice = 0
+
+To Register Click  2.
+Else to Authenticate Click 3
+Enter your choice = 2
+
+**************User Registration*****************
+Enter your Email= india@datastax.com
+Enter your password= indian
+
+15f408e8-e0a6-11ea-87d0-0242ac130003 has been registered for the email id india@datastax.com
+
+Authenticating your Account.....
+Successfully Authenticated :)
+```
+Copy this ` UUID ` for the future navigation.
+
+### 1.4.2 Authenticate an account
+If you have already registered, you may do authentication like the following one.
+```
+Enter your user Id = 15f408e8-e0a6-11ea-87d0-0242ac130003
+
+Authenticating your Account.....
+Successfully Authenticated :)
+```
+
+### 1.4.3 Add a product
+` Note: you must be registered & authenticated to add a product. `
+To add a product to this appplication for sale, do like the following one.
+```
+Enter the Product name = Raspberry PI 3 Model B+
+Enter the Product Description = A low cost pocket sized microcomputer
+Enter the Cost of the product = 3200      //in ruppes
+Enter the Discount of the product = 30    // in percentage
+Enter the year when product added = 2020
+Is the product available? Reply True or False.. True
+Enter Number of Stocks Left = 10
+Do you want to add tags to the product? Enter 1 for yes & 0 for No..
+1
+Add a Tag below !!
+Raspberry
+Do you want to add tags to the product? Enter 1 for yes & 0 for No..
+1
+Add a Tag below !!
+PI 3
+Your product has been successfully added for the sale !!
+```
+
