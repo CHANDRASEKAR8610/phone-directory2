@@ -290,6 +290,14 @@ Copy this ` UUID ` for the future navigation.
 ### 1.4.2 Authenticate an account
 If you have already registered, you may have to do authentication like the following one.
 ```
+Click 1 to view to view Latest Products
+Else, Click 0 to Register or Authenticate.
+Enter your choice = 0
+
+To Register Click  2
+Else to Authenticate Click 3
+Enter your choice = 3
+
 Enter your user Id = 15f408e8-e0a6-11ea-87d0-0242ac130003
 
 Authenticating your Account.....
@@ -301,6 +309,19 @@ Successfully Authenticated :)
 To add a product to this appplication for sale, do like the following one.
 
 ```
+Dear user, to Navigate to pages follow the below instructions carefully.
+* To view Latest products, Click 4
+* To view Product Details, Click 5
+* To Update your Profile, Click 6
+* To view your Profile, Click 7
+* To Add Product, Click 8
+* To Update your Product, Click 9
+* To Buy your Product, Click 10
+* To Delete your Account, Click 11
+* To Quit Application, Click 12
+
+Enter your Choice = 8
+
 Enter the Product name = Raspberry PI 3 Model B+
 Enter the Product Description = A low cost pocket sized microcomputer for Mini projects
 Enter the Cost of the product = 3200      //in ruppes
@@ -327,6 +348,19 @@ You can view Latest Products either without registering in this application or b
 Let's say if I have been registered, now to view Latest Products do like the following
 
 ```
+Dear user, to Navigate to pages follow the below instructions carefully.
+* To view Latest products, Click 4
+* To view Product Details, Click 5
+* To Update your Profile, Click 6
+* To view your Profile, Click 7
+* To Add Product, Click 8
+* To Update your Product, Click 9
+* To Buy your Product, Click 10
+* To Delete your Account, Click 11
+* To Quit Application, Click 12
+
+Enter your Choice = 4
+
 PRODUCTID                                        TITLE                          ADDED_BY                                ADDED_AT                        YEAR
 15f6ty78-e0a6-11ea-87d0-0242ac190903        Raspberry PI 3 Model B+     15f408e8-e0a6-11ea-87d0-0242ac130003           2020-08-19                       2020
 ```
@@ -337,6 +371,19 @@ Now I see 1 Record because we have added only one product. Keep Adding more Prod
 
 Do like the following
 ```
+Dear user, to Navigate to pages follow the below instructions carefully.
+* To view Latest products, Click 4
+* To view Product Details, Click 5
+* To Update your Profile, Click 6
+* To view your Profile, Click 7
+* To Add Product, Click 8
+* To Update your Product, Click 9
+* To Buy your Product, Click 10
+* To Delete your Account, Click 11
+* To Quit Application, Click 12
+
+Enter your Choice = 5
+
 Enter productid = 15f6ty78-e0a6-11ea-87d0-0242ac190903
 
 *****PRODUCT DETAILS******
@@ -358,6 +405,19 @@ Number of stocks left= 10
 
 To buy a product, do like the following
 ```
+Dear user, to Navigate to pages follow the below instructions carefully.
+* To view Latest products, Click 4
+* To view Product Details, Click 5
+* To Update your Profile, Click 6
+* To view your Profile, Click 7
+* To Add Product, Click 8
+* To Update your Product, Click 9
+* To Buy your Product, Click 10
+* To Delete your Account, Click 11
+* To Quit Application, Click 12
+
+Enter your Choice = 10
+
 Enter productid to buy the product = 15f6ty78-e0a6-11ea-87d0-0242ac190903
 Enter number of stocks needed = 5
 Enter yout Account type {CC ~ Credit Card / DC ~ Debit Card / IB ~ Internet Banking} = CC
@@ -370,7 +430,7 @@ Howzaat ! your purchase is successful and the produuct is on the way !!
 ### 1.4.7 Other Features
 
 In addition to the sales, we also offer the users to update their personal details and update their added products.
-Do like the above scenarios for all the other features and explore more to view the perfectness of this Application.
+Do like the above scenarios for all the other features and explore this application more to view the perfectness of Data Modelling.
 
 # Data Model for E-Shopping-App
 At First, let have a look at our Conceptual Data Model !!!
