@@ -434,5 +434,12 @@ Do like the above scenarios for all the other features and explore this applicat
 
 ## 2. Data Model for E-Shopping-App
 At First, let have a look at our Conceptual Data Model !!!
+![Conceptual Data Model]()
 
+# Resources
+1. [Datastax Python Driver Docs](https://docs.datastax.com/en/developer/python-driver/3.24/)
+2. [Cassandra-Python Driver](https://pypi.org/project/cassandra-driver/)
+3. [UUID and TIMEUUID Functions](https://docs.datastax.com/en/cql-oss/3.3/cql/cql_reference/timeuuid_functions_r.html)
+4. [How to insert UDT?](https://community.datastax.com/questions/7764/how-udt-values-are-inserted-into-c-table-using-dat.html?childToView=7795#answer-7795)
+5. [Docker-compose Docs](https://docs.docker.com/compose/gettingstarted/)
 
