@@ -1,4 +1,4 @@
-# phone-directory2
+# E-Shopping-App
 Hi ! I'm going to demonstrate my ` E-Shopping-App ` for Astraakathon Submission. This application lets you create an account, add or buy a product for sale. Follow the instructions given below for running this application in your Local System.
 
 # Content
@@ -7,15 +7,15 @@ Hi ! I'm going to demonstrate my ` E-Shopping-App ` for Astraakathon Submission.
 * [Data Model for ` E-Shopping-App `]()
 * [Reference]()
 
-# Run this application
+## 1. Run this application
 
-## 1.1 Prerequisite
+### 1.1 Prerequisite
 
 you must have following installed in your local system.
 1. Python 3.6 or later
 2. Docker Desktop latest
 
-## 1.2 Start Cassandra using Docker
+### 1.2 Start Cassandra using Docker
 To start cassandra on docker, jump into the specified directory and start ` CMD ` in the current directory.
 ```
 cd E-shopping-app/materials
@@ -36,7 +36,7 @@ cassandra-node1_1  | CompilerOracle: dontinline org/apache/cassandra/db/commitlo
 cassandra-node1_1  | INFO  [main] 2020-08-19 09:17:39,474 CassandraDaemon.java:556 - Not starting RPC server as requested. Use JMX (StorageService->startRPCServer()) or nodetool (enablethrift) to start it
 ```
 
-## 1.3 Create Schema Tables
+### 1.3 Create Schema Tables
 Start the ` cassandra-node ` on docker dashboard and open `CLI ` for the node. Now run the following to open Cql shell for querrying.
 ```
 # cqlsh
@@ -254,7 +254,7 @@ CREATE TABLE killrvideo.buy_product (
     AND speculative_retry = '99PERCENTILE';
 ```
 
-## 1.4 Run python file
+### 1.4 Run python file
 
 ` Note: Ensure that you have already installed cassandra-python-driver or please do install to run this application successfuly. `
 
@@ -263,7 +263,7 @@ Now run ` cluster.py ` from your ` CMD ` on your current directory.
 python cluster.py
 ```
 
-### 1.4.1 Register an account
+#### 1.4.1 Register an account
 To register an account in this appplication, Make sure you do like the following one.
 ```
 '**********************Electronics Shopping plaza*********************'
@@ -287,7 +287,7 @@ Successfully Authenticated :)
 
 Copy this ` UUID ` for the future navigation.
 
-### 1.4.2 Authenticate an account
+#### 1.4.2 Authenticate an account
 If you have already registered, you may have to do authentication like the following one.
 ```
 Click 1 to view to view Latest Products
@@ -304,7 +304,7 @@ Authenticating your Account.....
 Successfully Authenticated :)
 ```
 
-### 1.4.3 Add a product
+#### 1.4.3 Add a product
 ` Note: you must be registered & authenticated to add a product. `
 To add a product to this appplication for sale, do like the following one.
 
@@ -343,7 +343,7 @@ Your product "Raspberry PI 3 Model B+" has been successfully added for the sale 
 15f6ty78-e0a6-11ea-87d0-0242ac190903 is your productid.
 ```
 
-### 1.4.4 View Latest Products
+#### 1.4.4 View Latest Products
 You can view Latest Products either without registering in this application or by registering in this application.
 Let's say if I have been registered, now to view Latest Products do like the following
 
@@ -366,7 +366,7 @@ PRODUCTID                                        TITLE                          
 ```
 Now I see 1 Record because we have added only one product. Keep Adding more Products !!!!!
 
-### 1.4.5 View Specific Product Details
+#### 1.4.5 View Specific Product Details
 ` Note: you must be registered & authenticated to View Specific Product Details. `
 
 Do like the following
@@ -395,12 +395,12 @@ Product Cost = 3200         //in rupees
 Product Discount = 30       // in percentage
 Product added at = 2020-08-19
 Product added by = 15f408e8-e0a6-11ea-87d0-0242ac130003
-Tags = 
+Tags = Sortedset{'Raspberry','PI 3'}
 Is the Product Still available? True
 Number of stocks left= 10
 ```
 
-### 1.4.6 Buy a Product
+#### 1.4.6 Buy a Product
 ` Note: you must be registered & authenticated to buy a Product. `
 
 To buy a product, do like the following
@@ -427,12 +427,12 @@ Linking to your Bank Account....
 Transaction in Progress......
 Howzaat ! your purchase is successful and the produuct is on the way !!
 ```
-### 1.4.7 Other Features
+#### 1.4.7 Other Features
 
 In addition to the sales, we also offer the users to update their personal details and update their added products.
 Do like the above scenarios for all the other features and explore this application more to view the perfectness of Data Modelling.
 
-# Data Model for E-Shopping-App
+## 2. Data Model for E-Shopping-App
 At First, let have a look at our Conceptual Data Model !!!
 
 
