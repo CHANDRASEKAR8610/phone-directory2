@@ -5,7 +5,7 @@ Hi ! I'm going to demonstrate my ` E-Shopping-App ` for Astraakathon Submission.
 
 * [Run this application]()
 * [Data Model for ` E-Shopping-App `]()
-* [Reference]()
+* [Reference & Resources]()
 
 ## 1. Run this application
 
@@ -436,7 +436,7 @@ Do like the above scenarios for all the other features and explore this applicat
 At First, let have a look at our Conceptual Data Model !!!
 ![Conceptual Data Model]()
 
-# Resources
+# 3. Reference & Resources
 1. [Datastax Python Driver Docs](https://docs.datastax.com/en/developer/python-driver/3.24/)
 2. [Cassandra-Python Driver](https://pypi.org/project/cassandra-driver/)
 3. [UUID and TIMEUUID Functions](https://docs.datastax.com/en/cql-oss/3.3/cql/cql_reference/timeuuid_functions_r.html)
